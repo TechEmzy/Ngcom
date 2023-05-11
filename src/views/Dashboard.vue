@@ -46,23 +46,24 @@
             <p>{{ currentTime }}</p>
           </div>
           <!-- * current date and time -->
-          
+
           <!-- Wallet Footer -->
           <div class="wallet-footer">
             <div class="item">
-              <router-link :to="{ name: 'SiteSurvey' }"
+              <router-link
+                :to="{ name: 'SiteSurvey' }"
                 data-bs-toggle="modal"
                 data-bs-target="#withdrawActionSheet"
               >
                 <div class="icon-wrapper bg-danger">
                   <ion-icon name="telescope-outline"></ion-icon>
                 </div>
-                <strong>Site Survey</strong>
+                <strong>My Surveys</strong>
               </router-link>
             </div>
             <div class="item">
-              <a
-                href="#"
+              <router-link
+                :to="{ name: 'BaseStation' }"
                 data-bs-toggle="modal"
                 data-bs-target="#sendActionSheet"
               >
@@ -70,7 +71,7 @@
                   <ion-icon name="location-outline"></ion-icon>
                 </div>
                 <strong>Base Station</strong>
-              </a>
+              </router-link>
             </div>
             <div class="item">
               <a href="app-cards.html">
@@ -117,9 +118,9 @@
                     <div class="input-wrapper">
                       <label class="label" for="account1">From</label>
                       <select class="form-control custom-select" id="account1">
-                        <option value="0">Savings (*** 5019)</option>
-                        <option value="1">Investment (*** 6212)</option>
-                        <option value="2">Mortgage (*** 5021)</option>
+                        <option value="0">Savings (* 5019)</option>
+                        <option value="1">Investment (* 6212)</option>
+                        <option value="2">Mortgage (* 5021)</option>
                       </select>
                     </div>
                   </div>
@@ -173,9 +174,9 @@
                     <div class="input-wrapper">
                       <label class="label" for="account2d">From</label>
                       <select class="form-control custom-select" id="account2d">
-                        <option value="0">Savings (*** 5019)</option>
-                        <option value="1">Investment (*** 6212)</option>
-                        <option value="2">Mortgage (*** 5021)</option>
+                        <option value="0">Savings (* 5019)</option>
+                        <option value="1">Investment (* 6212)</option>
+                        <option value="2">Mortgage (* 5021)</option>
                       </select>
                     </div>
                   </div>
@@ -244,9 +245,9 @@
                     <div class="input-wrapper">
                       <label class="label" for="account2">From</label>
                       <select class="form-control custom-select" id="account2">
-                        <option value="0">Savings (*** 5019)</option>
-                        <option value="1">Investment (*** 6212)</option>
-                        <option value="2">Mortgage (*** 5021)</option>
+                        <option value="0">Savings (* 5019)</option>
+                        <option value="1">Investment (* 6212)</option>
+                        <option value="2">Mortgage (* 5021)</option>
                       </select>
                     </div>
                   </div>
@@ -507,21 +508,23 @@
     </div>
     <!-- * App Capsule -->
   </div>
-  <AppBottomMenu />
 
+  <!-- bottom menu -->
+  <AppBottomMenu />
+  <!--* bottom menu -->
 </template>
 
 <script>
-import AppBottomMenu from '../components/AppBottomMenu.vue'
+import AppBottomMenu from "../components/AppBottomMenu.vue";
 
 export default {
   name: "Dashboard",
-  components: { AppBottomMenu},
+  components: { AppBottomMenu },
 
-  data (){
+  data() {
     return {
       currentTime: new Date().toLocaleString(),
-    }
+    };
   },
   mounted() {
     setInterval(() => {
@@ -538,6 +541,6 @@ p {
   text-align: left;
   font-size: 15px;
   font-weight: 900;
-  color: #27173E;
+  color: #27173e;
 }
 </style>

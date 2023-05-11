@@ -66,7 +66,7 @@ a:hover, a:active, a:focus {
 }
 
 .appHeader.transparent {
-  background: transparent;
+  background: #fe5919;
 }
 
 .appHeader.transparent:before {
@@ -96,9 +96,8 @@ a:hover, a:active, a:focus {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  color: rgb(50, 35, 50);
+  color: #6236FF;
   position: relative;
-  border: none;
 }
 
 .appHeader .left .headerButton .btn,
@@ -130,7 +129,7 @@ a:hover, a:active, a:focus {
 }
 
 .appHeader .pageTitle .logo {
-  max-height: 55px;
+  max-height: 72px;
 }
 
 .appHeader.text-light {
@@ -994,15 +993,11 @@ h1 {
   font-size: 32px;
   font-weight: 700;
 }
-.pTitle{
-  font-size: 18px;
-    margin: 0;
-    color: #212529;
-}
 
 h2 {
-  font-size: 20px;
-  font-weight: 700;
+      font-size: 20px;
+    font-weight: 700;
+    margin-top: 30px;
 }
 
 h3 {
@@ -1877,14 +1872,15 @@ a.badge-dark {
 }
 
 .btn-info {
-  background: #05D0A4 !important;
-  border-color: #05D0A4 !important;
+  background: #fe5919 !important;
+  border-color: #fe5919 !important;
   color: #FFFFFF !important;
+  width: 90px;
 }
 
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active {
-  background: #04b790 !important;
-  border-color: #04b790 !important;
+  background: #fe5919 !important;
+  border-color: #fe5919 !important;
 }
 
 .btn-info.disabled, .btn-info:disabled {
@@ -5115,7 +5111,7 @@ textarea,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .section-heading.padding {
@@ -5295,6 +5291,7 @@ textarea,
   margin: 0;
   color: #958d9e;
   font-weight: 500;
+  text-align: left;
 }
 
 .transactions .item .detail {
@@ -5310,9 +5307,10 @@ textarea,
 
 .transactions .item .detail strong {
   display: block;
-  font-weight: 500;
+  font-weight: 700;
   color: #27173E;
   margin-bottom: 3px;
+  text-align: left;
 }
 
 .transactions .item .right {
