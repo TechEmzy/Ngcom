@@ -16,7 +16,7 @@
         <img src="../assets/img/ngcom_net.jpg" alt="logo" class="logo" />
       </div>
       <div class="right">
-        <a href="app-settings.html" class="headerButton">
+        <a href="#" class="headerButton">
           <img
             src="../assets/img/Settings.jpg"
             alt="image"
@@ -36,14 +36,14 @@
           <div class="balance">
             <div class="left">
               <span class="title">Welcome</span>
-              <h1 class="total">Emmanuel</h1>
+              <h1 class="total">Administrator</h1>
             </div>
           </div>
           <!-- * Balance -->
 
           <!-- current date and time -->
           <div class="left">
-            <p>{{ currentTime }}</p>
+            <p> {{ currentTime }} </p>
           </div>
           <!-- * current date and time -->
 
@@ -73,25 +73,25 @@
                 <strong>Base Station</strong>
               </router-link>
             </div>
-            <div class="item">
+            <!-- <div class="item">
               <a href="app-cards.html">
                 <div class="icon-wrapper bg-success">
                   <ion-icon name="card-outline"></ion-icon>
                 </div>
                 <strong>Cards</strong>
               </a>
-            </div>
+            </div> -->
             <div class="item">
-              <a
-                href="#"
+              <router-link
+                :to="{ name: 'Installation' }"
                 data-bs-toggle="modal"
                 data-bs-target="#exchangeActionSheet"
               >
                 <div class="icon-wrapper bg-warning">
-                  <ion-icon name="swap-vertical"></ion-icon>
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
                 </div>
-                <strong>Exchange</strong>
-              </a>
+                <strong>My Installation</strong>
+              </router-link>
             </div>
           </div>
           <!-- * Wallet Footer -->
@@ -155,280 +155,26 @@
       </div>
       <!-- * Deposit Action Sheet -->
 
-      <!-- Withdraw Action Sheet -->
-      <div
-        class="modal fade action-sheet"
-        id="withdrawActionSheet"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Withdraw Money</h5>
-            </div>
-            <div class="modal-body">
-              <div class="action-sheet-content">
-                <form>
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="account2d">From</label>
-                      <select class="form-control custom-select" id="account2d">
-                        <option value="0">Savings (* 5019)</option>
-                        <option value="1">Investment (* 6212)</option>
-                        <option value="2">Mortgage (* 5021)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="text11d">To</label>
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="text11d"
-                        placeholder="Enter IBAN"
-                      />
-                      <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                      </i>
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <label class="label">Enter Amount</label>
-                    <div class="input-group mb-2">
-                      <span class="input-group-text" id="basic-addonb1">$</span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter an amount"
-                        value="100"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <button
-                      type="button"
-                      class="btn btn-primary btn-block btn-lg"
-                      data-bs-dismiss="modal"
-                    >
-                      Withdraw
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- * Withdraw Action Sheet -->
-
-      <!-- Send Action Sheet -->
-      <div
-        class="modal fade action-sheet"
-        id="sendActionSheet"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Send Money</h5>
-            </div>
-            <div class="modal-body">
-              <div class="action-sheet-content">
-                <form>
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="account2">From</label>
-                      <select class="form-control custom-select" id="account2">
-                        <option value="0">Savings (* 5019)</option>
-                        <option value="1">Investment (* 6212)</option>
-                        <option value="2">Mortgage (* 5021)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="text11">To</label>
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="text11"
-                        placeholder="Enter bank ID"
-                      />
-                      <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                      </i>
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <label class="label">Enter Amount</label>
-                    <div class="input-group mb-2">
-                      <span class="input-group-text" id="basic-addon1">$</span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter an amount"
-                        value="100"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <button
-                      type="button"
-                      class="btn btn-primary btn-block btn-lg"
-                      data-bs-dismiss="modal"
-                    >
-                      Send
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- * Send Action Sheet -->
-
-      <!-- Exchange Action Sheet -->
-      <div
-        class="modal fade action-sheet"
-        id="exchangeActionSheet"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Exchange Money</h5>
-            </div>
-            <div class="modal-body">
-              <div class="action-sheet-content">
-                <form>
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="form-group basic">
-                        <div class="input-wrapper">
-                          <label class="label" for="currency1">From</label>
-                          <select
-                            class="form-control custom-select"
-                            id="currency1"
-                          >
-                            <option value="1">EUR</option>
-                            <option value="2">USD</option>
-                            <option value="3">AUD</option>
-                            <option value="4">CAD</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="form-group basic">
-                        <div class="input-wrapper">
-                          <label class="label" for="currency2">To</label>
-                          <select
-                            class="form-control custom-select"
-                            id="currency2"
-                          >
-                            <option value="1">USD</option>
-                            <option value="1">EUR</option>
-                            <option value="2">AUD</option>
-                            <option value="3">CAD</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <label class="label">Enter Amount</label>
-                    <div class="input-group mb-2">
-                      <span class="input-group-text" id="basic-addon2">$</span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter an amount"
-                        value="100"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <button
-                      type="button"
-                      class="btn btn-primary btn-block btn-lg"
-                      data-bs-dismiss="modal"
-                    >
-                      Exchange
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- * Exchange Action Sheet -->
-
       <!-- Transactions -->
       <div class="section mt-4">
         <div class="section-heading">
           <h2 class="title">Site Survey</h2>
-          <a href="app-transactions.html" class="link">View All</a>
+          <router-link :to="{ name: 'SiteSurvey' }" class="link"
+            >View All</router-link
+          >
         </div>
         <div class="transactions">
           <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
+          <div
+            class="item"
+            v-for="item in sortedSurvey.slice(0, 5)"
+            :key="item.id"
+          >
             <div class="detail">
               <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
+                <strong>{{ item.clientname }}</strong>
+                <p>{{ item.siteaddress }}</p>
+                <p>{{ item.scheduledtimeforsurvey }}</p>
               </div>
             </div>
           </div>
@@ -441,63 +187,29 @@
       <div class="section mt-4">
         <div class="section-heading">
           <h2 class="title">Installations</h2>
-          <a href="app-transactions.html" class="link">View All</a>
+          <router-link :to="{ name: 'Installation' }" class="link">View All</router-link>
         </div>
         <div class="transactions">
           <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
+          <div class="item"
+            v-for="item in sortedInstallation.slice(0, 5)"
+            :key="item.id"
+          >
             <div class="detail">
               <div>
-                <strong></strong>
+                <strong>{{ item.customer }}</strong>
+                <p>{{ item.location }}</p>
+                <p>{{ item.installation_date }}</p>
+                <p>{{ item.scheduledtimeforinstallation }}</p>
               </div>
             </div>
           </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
-
-          <!-- item -->
-          <div href="app-transaction-detail.html" class="item">
-            <div class="detail">
-              <div>
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <!-- * item -->
+          <!-- * item -->    
         </div>
       </div>
       <!-- * Transactions -->
-
-      <!-- * News -->
+      <br />
+      <br />
 
       <!-- app footer -->
       <div class="appFooter">
@@ -516,6 +228,7 @@
 
 <script>
 import AppBottomMenu from "../components/AppBottomMenu.vue";
+import axios from "axios";
 
 export default {
   name: "Dashboard",
@@ -523,13 +236,113 @@ export default {
 
   data() {
     return {
-      currentTime: new Date().toLocaleString(),
+      currentTime: '',
+      // currentTime: new Date().toLocaleString(),
+      survey: [],
+      installation: [],
     };
   },
   mounted() {
     setInterval(() => {
-      this.currentTime = new Date().toLocaleString();
+      this.currentTime = this.formatDate(new Date());
     }, 1000);
+    this.getSurvey();
+    this.getInstallation();
+  },
+  methods: {
+    formatDate(date) {
+    const options = { day: "numeric", month: "long", year: "numeric" };
+    const formatter = new Intl.DateTimeFormat("en", options);
+    const parts = formatter.formatToParts(date);
+
+    let formattedDate = "";
+    let day = "";
+    let month = "";
+    let year = "";
+
+    for (const part of parts) {
+      switch (part.type) {
+        case "day":
+          day = part.value;
+          const dayNumber = parseInt(day, 10);
+          let suffix = "th";
+          if (dayNumber === 1 || dayNumber === 21 || dayNumber === 31) {
+            suffix = "st";
+          } else if (dayNumber === 2 || dayNumber === 22) {
+            suffix = "nd";
+          } else if (dayNumber === 3 || dayNumber === 23) {
+            suffix = "rd";
+          }
+          day = day + suffix;
+          break;
+        case "month":
+          month = part.value;
+          break;
+        case "year":
+          year = part.value;
+          break;
+      }
+    }
+
+    formattedDate = `${day} ${month} ${year}`;
+
+    return formattedDate;
+  },
+    
+    getSurvey() {
+      axios
+        .get(
+          "process.env.VUE_APP_GET_PENDING_SITESURVEY_URL",
+          {
+            headers: {
+              "x-api-key": localStorage.getItem("api_key"),
+            },
+          }
+        )
+        .then((response) => {
+          this.survey = response.data.data;
+          console.log(this.survey["data"]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    getInstallation() {
+      axios
+        .get(
+          "process.env.VUE_APP_INSTALLATION_URL",
+          {
+            headers: {
+              "x-api-key": localStorage.getItem("api_key"),
+            },
+          }
+        )
+        .then((response) => {
+          this.installation = response.data.data;
+          console.log(this.installation["data"]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  computed: {
+    sortedSurvey() {
+      return this.survey.slice().sort((a, b) => {
+        const dateA = new Date(a.scheduledtimeforsurvey);
+        const dateB = new Date(b.scheduledtimeforsurvey);
+        return dateA - dateB;
+      });
+    },
+
+    sortedInstallation() {
+      return this.installation.slice().sort((a, b) => {
+        const dateA = new Date(a.scheduledtimeforinstallation);
+        const dateB = new Date(b.scheduledtimeforinstallation);
+        return dateA - dateB;
+      });
+    },
   },
 };
 </script>

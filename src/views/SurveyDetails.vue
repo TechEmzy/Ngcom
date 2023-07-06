@@ -356,6 +356,8 @@
                 </button>
               </div>
             </form>
+            <br>
+            <br>
           </div>
         </div>
       </div>
@@ -372,18 +374,22 @@
 import axios from "axios";
 import AppHeader from "../components/AppHeader.vue";
 import AppBottomMenu from "../components/AppBottomMenu.vue";
+import useCamera from '../useCamera';
 
 export default {
   props: ["baseStations"],
   name: "SurveyDetails",
-  components: { AppHeader, AppBottomMenu },
+  components: { AppHeader, AppBottomMenu, useCamera },
   data() {
     return {
+      surveyId: "",
       baseStations: {},
       selectedFile: null,
       selectedFile2: null,
       selectedFile3: null,
+      takePhoto: null,
       responseData: {
+        id: "",
         achievable: "",
         installation_radio: "",
         recommended_router: "",
@@ -417,13 +423,14 @@ export default {
   },
   methods: {
     fetchData(id) {
+      this.surveyId = id;
       axios
         .get(
-          `https://lan.ngcomworld.com/api/v1/sitesurveyreq/getsitesurveybyid?id=${id}`,
+          `process.env.VUE_APP_SD_URL`,
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
-              "x-api-key": "o44oo0owc0g4ckkss84g0o8oc8ow80c4g4sk00w0",
+              "x-api-key": "process.env.VUE_APP_API_KEY",
             },
           }
         )
@@ -446,37 +453,45 @@ export default {
       this.selectedFile3 = event.target.files[0];
     },
 
-    submitForm() {
-      const formData = new FormData();
-      for (const key in this.responseData) {
+    submitForm(e) {
+      e.preventDefault();
+      let formData = new FormData();
+      for (let key in this.responseData) {
         formData.append(key, this.responseData[key]);
       }
       formData.append("image1", this.selectedFile);
       formData.append("image2", this.selectedFile2);
       formData.append("image3", this.selectedFile3);
+      
+      formData.append("id", this.surveyId);
+      formData.append("username", "admin");
+      formData.append("achievable", "YES");
+      formData.append("achievable", "YES");
+
 
       axios
         .post(
-          "https://testenv.ciphernet.net/ngcomintranetv2/api/v1/sitesurveyreq/executesitesurvey",
+          "process.env.VUE_APP_EXECUTE_SITESURVEY_URL",
           formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              "x-api-key": "w80ogcww8goscoogoksc0cws0kso8os8s0ssc04c",
+              "x-api-key": "process.env.VUE_APP_API_KEY",
             },
           }
         )
         .then((response) => {
           this.responseData = response.data;
           // handle success response
-          // console.log(response.data);
-          console.log(response.formData);
+          console.log(this.responseData);
           console.log(response.status);
+          //this.$toast.success("Form submitted successfully"); // Display success toast
         })
         .then((result) => console.log(result))
         .catch((error) => {
           // handle error response
           console.log(error);
+          //this.$toast.error("An error occurred while submitting the form"); // Display error toast
         });
     },
 
@@ -523,11 +538,11 @@ export default {
     fetchData2() {
       axios
         .get(
-          "https://testenv.ciphernet.net/ngcomintranetv2/api/v1/sitesurveyreq/getbasestations",
+          "process.env.VUE_APP_GET_BASESTATION_URL",
           {
             headers: {
-              "x-api-key": "w80ogcww8goscoogoksc0cws0kso8os8s0ssc04c",
-              cookie: "ci_sessions=if3p6tnpc9usk046svq8fdlnceo6of1j",
+              "x-api-key": "process.env.VUE_APP_API_KEY",
+              "cookie": "process.en.VUE_APP_BASESTATION_COOKIE",
             },
           }
         )
@@ -546,9 +561,21 @@ export default {
 </script>
 <style scoped>
 .modal-title {
-    margin-bottom: 0;
-    line-height: 1.5;
-    font-weight: 600;
-    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid #DCDCE9;
+    padding: 0 30px 0 0;
+    border-radius: 0;
+    height: 40px;
+    color: #27173E;
+    font-size: 15px;
+}
+.form-group .label {
+    font-size: 11px;
+    margin: 0;
+    font-weight: 500;
+    color: #27173E;
+    display: block;
+    line-height: 1.2em;
+    text-align: left;
 }
 </style>

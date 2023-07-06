@@ -1,13 +1,13 @@
 <template>
   <!-- App Header -->
   <div>
-    <AppHeader title="Site Survey" />
+    <AppHeader title="My Installation Reports" />
   </div>
   <!-- * App Header -->
   <br />
 
-  <!-- Transactions -->
-  <div class="section mt-4" v-if="responseData">
+   <!-- Transactions -->
+   <div class="section mt-4" v-if="responseData">
     <div class="section-heading">
       <h2 class="left">Pending</h2>
     </div>
@@ -15,14 +15,15 @@
       <!-- item -->
       <router-link
         class="item"
-        :to="{ name: 'SurveyDetails', params: { id: item.id } }"
+        :to="{ name: 'InstallationDetails', params: { id: item.id } }"
         v-for="item in displayedItems"
         :key="item.id"
       >
         <div class="detail">
           <div>
-            <strong>{{ item.clientname }}</strong>
-            <p>{{ item.siteaddress }}</p>
+            <strong>{{ item.installationtitle }}</strong>
+            <p>{{ item.installationtype }}</p>
+            <p>{{ item.location }}</p>
           </div>
         </div>
         <div class="right">
@@ -33,9 +34,9 @@
             ></ion-icon>
           </div>
         </div>
-      </router-link>
+      </router-link> 
       <!-- * item -->
-    </div>
+    </div> 
 
     <br />
 
@@ -53,7 +54,6 @@
     </div>
     <!--* pagination buttons -->
   </div>
-
   <br />
   <br />
   <br />
@@ -61,12 +61,12 @@
   <br />
   <br />
   <br />
-  
   <!-- bottom menu -->
   <div>
     <AppBottomMenu />
   </div>
   <!--* bottom menu -->
+  
 </template>
 
 <script>
@@ -102,7 +102,7 @@ export default {
   methods: {
     item(value) {
       this.$router.push({
-        name: "SiteSurvey",
+        name: "Installation",
         params: {
           id: value,
         },
@@ -111,7 +111,7 @@ export default {
     fetchData() {
       axios
         .get(
-          "process.env.VUE_APP_GET_PENDING_SITESURVEY_URL",
+          "process.env.VUE_APP_INSTALLATION_URL",
           {
             headers: {
               "x-api-key": localStorage.getItem("api_key"),
@@ -127,28 +127,11 @@ export default {
         });
     },
   },
-};
+
+}
 </script>
 
 <style scoped>
-/* button {
-  border: none;
-  color: #fff;
-  background-image: linear-gradient(30deg, #fe5919, #e09577);
-  border-radius: 20px;
-  background-size: 100% auto;
-  font-family: inherit;
-  font-size: 17px;
-  padding: 0.6em 1.5em;
-} */
-
-/* button:hover {
-  background-position: right center;
-  background-size: 200% auto;
-  -webkit-animation: pulse 2s infinite;
-  animation: pulse512 1.5s infinite;
-} */
-
 .pagination {
   display: flex;
   padding-left: 0;

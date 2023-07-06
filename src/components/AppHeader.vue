@@ -2,12 +2,9 @@
   <!-- App Header -->
   <div class="appHeader no-border transparent position-fix">
     <div class="left">
-      <!-- <a href="#" class="headerButton goBack">
-                <ion-icon name="chevron-back-outline"></ion-icon>
-            </a> -->
-      <button id="headerBtn" @click="back" class="headerButton goBack">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </button>
+      <!-- <button id="headerBtn" @click="back" class="headerButton goBack"> -->
+        <ion-icon name="chevron-back-outline" @click="back"></ion-icon>
+      <!-- </button> -->
     </div>
     <div class="pageTitle">
       <h1 class="pTitle">{{ title }}</h1>

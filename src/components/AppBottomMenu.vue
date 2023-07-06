@@ -2,40 +2,54 @@
   <id class="appBottomMenu">
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
-      <a href="/HTML/" class="item active">
+      <router-link :to="{ name: 'Dashboard' }" class="item" :class="{ active: isActiveRoute('Dashboard') }">
         <div class="col">
-          <ion-icon name="pie-chart-outline"></ion-icon>
+          <ion-icon name="pie-chart-outline" class="ionicon s-ion-icon"></ion-icon>
           <strong>Overview</strong>
         </div>
-      </a>
+      </router-link>
 
-      <a href="app-pages.html" class="item">
+      <router-link :to="{ name: 'Engineering' }" class="item" :class="{ active: isActiveRoute('Engineering') }">
         <div class="col">
-          <ion-icon name="document-text-outline"></ion-icon>
-          <strong>Pages</strong>
+          <ion-icon name="compass-outline" class="ionicon s-ion-icon"></ion-icon>
+          <strong>Engineering</strong>
         </div>
-      </a>
+      </router-link>
 
-      <a href="app-components.html" class="item">
+      <!-- <a href="app-components.html" class="item">
         <div class="col">
           <ion-icon name="apps-outline"></ion-icon>
           <strong>Components</strong>
         </div>
-      </a>
+      </a> -->
 
-      <a href="app-settings.html" class="item">
+      <router-link :to="{ name: 'Settings' }" class="item" :class="{ active: isActiveRoute('Settings') }">
         <div class="col">
-          <ion-icon name="settings-outline"></ion-icon>
+          <ion-icon name="settings-outline" class="ionicon s-ion-icon"></ion-icon>
           <strong>Settings</strong>
         </div>
-      </a>
+      </router-link>
     </div>
     <!-- * App Bottom Menu -->
   </id>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    isActiveRoute(routeName) {
+      return this.$route.name === routeName;
+    }
+  }
+}
 </script>
 
-<style></style>
+<style>
+.active {
+    color: #fe5919;
+  }
+
+.item {
+    color: #27173e;
+  }
+</style>

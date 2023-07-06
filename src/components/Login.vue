@@ -6,9 +6,9 @@
         src="../assets/img/logo.jpg"
         class="mb-2"
         alt="ngcom image"
-        style="width: 25%"
+        style="width: 40%"
       />
-      <h1>Log in</h1>
+      <!-- <h1>Log in</h1> -->
       <h4>Fill the form to log in</h4>
     </div>
     <div class="section mb-5 p-2">
@@ -17,11 +17,11 @@
           <div class="card-body pb-1">
             <div class="form-group basic">
               <div class="input-wrapper">
-                <label class="label" for="email1">Username</label>
+                <label class="label" for="username">Username</label>
                 <input
-                  type="username"
+                  type="text"
                   class="form-control"
-                  id="email1"
+                  id="username"
                   placeholder="Your Username"
                   v-model="username"
                   required
@@ -58,6 +58,9 @@
           </button>
         </div>
       </form>
+
+      <h4 v-if="loginError" class="error" style="color: red; margin-top: 10px;"> {{ loginError }} </h4>
+
     </div>
   </div>
   <!-- * App Capsule -->
@@ -71,76 +74,47 @@ export default {
     return {
       username: "",
       secret: "",
-      passwordError: null,
+      loginError: "",
+      correctUsername: "admin",
+      correctPassword: "System", // Replace with the correct password
     };
   },
 
   methods: {
     handleSubmit() {
-      // validate password
-      this.passwordError =
-        this.secret.length > 5
-          ? ""
-          : "Password must be at least 6 characters long";
-      if (!this.passwordError) {
-        // make post request to database to save user
-        axios
-          .post(
-            "https://testenv.ciphernet.net/ngcomintranetv2/api/v1/auth/getkeys",
-            {
-              username: this.username,
-              secret: this.secret,
-            },
-            {
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-            }
-          )
-          .then((response) => {
-            console.log(response.data);
-            localStorage.setItem("username", response.data.username);
-            localStorage.setItem("api_key", response.data.api_key);
-            console.log(response.data.username);
-            console.log(response.data.api_key);
-            this.$router.push("Dashboard");
-          })
-          .catch((error) => {
-            this.errorMessage = error.message;
-            console.error("There was an error!", error);
-          });
-        console.log("username: ", this.username);
-        console.log("secret: ", this.secret);
+      // Check if the entered password and email is correct
+      if (this.secret !== this.correctPassword || this.username !== this.correctUsername) {
+        this.loginError = "Incorrect username or password!";
+        return;
       }
+
+      // make post request to database to save user
+      axios
+        .post(
+          "process.env.VUE_APP_LOGIN_URL",
+          {
+            username: this.username,
+            secret: this.secret,
+          },
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("username", response.data.username);
+          localStorage.setItem("api_key", response.data.api_key);
+          console.log(response.data.username);
+          console.log(response.data.api_key);
+          this.$router.push("Dashboard");
+        })
+        .catch((error) => {
+          this.loginError = "Network error!";
+          console.error("There was an error!", error);
+        });
     },
   },
 };
 </script>
-
-<!-- <template>
-    <form @submit.prevent="handleSubmit">
-      <input type="email" required placeholder="email" v-model="email">
-      <input type="password" required placeholder="password" v-model="password">
-      <div class="error">{{ error }}</div>
-      <button>Log in</button>
-    </form>
-  </template>
-  
-  <script>
-  import { ref } from 'vue'
-  import useLogin from '../composables/useLogin'
-  export default {
-    setup(props, context) {
-      // refs
-      const email = ref('')
-      const password = ref('')
-      const { error, login } = useLogin()
-      const handleSubmit = async () => {
-        await login(email.value, password.value)
-        if (!error.value) {
-          context.emit('login')
-        }
-      }
-      return { email, password, handleSubmit, error }
-    }
-  } -->
