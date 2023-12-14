@@ -216,7 +216,7 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #dcdce9;
+  border-top: 0.1px solid #dcdce9;
   padding-left: 4px;
   padding-right: 4px;
   padding-bottom: env(safe-area-inset-bottom);
@@ -603,7 +603,7 @@ a:focus {
   text-align: center;
   line-height: 1.2em;
   background: #fff;
-  /* position: fixed; */
+  margin-bottom: 50px;
 }
 
 .appFooter .footer-title {

@@ -2,6 +2,7 @@
   <id class="appBottomMenu">
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
+      <!-- Dashboard section -->
       <router-link :to="{ name: 'Dashboard' }" class="item" :class="{ active: isActiveRoute('Dashboard') }">
         <div class="col">
           <ion-icon name="pie-chart-outline" class="ionicon s-ion-icon"></ion-icon>
@@ -9,6 +10,7 @@
         </div>
       </router-link>
 
+      <!-- Engineering section -->
       <router-link :to="{ name: 'Engineering' }" class="item" :class="{ active: isActiveRoute('Engineering') }">
         <div class="col">
           <ion-icon name="compass-outline" class="ionicon s-ion-icon"></ion-icon>
@@ -16,13 +18,7 @@
         </div>
       </router-link>
 
-      <!-- <a href="app-components.html" class="item">
-        <div class="col">
-          <ion-icon name="apps-outline"></ion-icon>
-          <strong>Components</strong>
-        </div>
-      </a> -->
-
+      <!-- Settings section -->
       <router-link :to="{ name: 'Settings' }" class="item" :class="{ active: isActiveRoute('Settings') }">
         <div class="col">
           <ion-icon name="settings-outline" class="ionicon s-ion-icon"></ion-icon>

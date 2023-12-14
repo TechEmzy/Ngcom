@@ -1,16 +1,31 @@
 <template>
+  <!-- Overlay -->
+  <div id="overlay" v-if="isLoading">
+    <div class="overlay-content">
+      <img
+        src="../assets/img/loading-circle.png"
+        alt="Loading"
+        class="loading-icon"
+      />
+    </div>
+  </div>
+  <!-- * Overlay -->
+
   <!-- App Header -->
   <div>
-    <AppHeader title="My Installation Reports" />
+    <AppHeader title="Installation Reports" />
   </div>
   <!-- * App Header -->
   <br />
 
-   <!-- Transactions -->
-   <div class="section mt-4" v-if="responseData">
+  <!-- pending installation section -->
+  <div class="section mt-4" v-if="responseData">
+    
     <div class="section-heading">
       <h2 class="left">Pending</h2>
     </div>
+
+    <!-- list of installation report -->
     <div class="transactions">
       <!-- item -->
       <router-link
@@ -21,9 +36,10 @@
       >
         <div class="detail">
           <div>
-            <strong>{{ item.installationtitle }}</strong>
-            <p>{{ item.installationtype }}</p>
+            <strong>{{ item.customer }}</strong>
+            <!-- <p>{{ item.installationtype }}</p> -->
             <p>{{ item.location }}</p>
+            <p>{{ item.installation_date }}</p>
           </div>
         </div>
         <div class="right">
@@ -37,23 +53,33 @@
       </router-link> 
       <!-- * item -->
     </div> 
+    <!-- * list of installation reports -->
 
     <br />
 
     <!-- pagination buttons -->
-    <div class="text-end">
+    <div>
+
       <div class="pagination" v-if="totalPages > 0">
-        <button type="button" class="btn btn-icon btn-info me-1" v-if="currentPage > 1" @click="currentPage--">
-          <ion-icon name="play-back-outline"></ion-icon>
-        </button>
+        <div class="left">
+          <button type="button" class="btn btn-icon btn-info me-1" v-if="currentPage > 1" @click="currentPage--">
+            <ion-icon name="play-back-outline"></ion-icon>
+          </button>
+        </div>
         
-        <button type="button" class="btn btn-icon btn-info me-1" v-if="currentPage < totalPages" @click="currentPage++">
-          <ion-icon name="play-forward-outline"></ion-icon>
-        </button>
+        <div class="right">
+          <button type="button" class="btn btn-icon btn-info me-1" v-if="currentPage < totalPages" @click="currentPage++">
+            <ion-icon name="play-forward-outline"></ion-icon>
+          </button>
+        </div> 
       </div>
+
     </div>
     <!--* pagination buttons -->
+
   </div>
+  <!--* pending installation section -->
+
   <br />
   <br />
   <br />
@@ -61,6 +87,7 @@
   <br />
   <br />
   <br />
+
   <!-- bottom menu -->
   <div>
     <AppBottomMenu />
@@ -82,6 +109,7 @@ export default {
       responseData: null,
       itemsPerPage: 10,
       currentPage: 1,
+      isLoading: true,
     };
   },
   mounted() {
@@ -108,10 +136,12 @@ export default {
         },
       });
     },
+
+    // fetching pending installations
     fetchData() {
       axios
         .get(
-          "process.env.VUE_APP_INSTALLATION_URL",
+          process.env.VUE_APP_INSTALLATION_URL,
           {
             headers: {
               "x-api-key": localStorage.getItem("api_key"),
@@ -124,6 +154,9 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
   },
@@ -134,13 +167,11 @@ export default {
 <style scoped>
 .pagination {
   display: flex;
-  padding-left: 0;
+  padding-left: 5px;
   list-style: none;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   font-size: 20px;
-  /* background-color: white; */
-  position: absolute;
   z-index: 1;
   margin-top: 0%;
   border-bottom-right-radius: 10px;

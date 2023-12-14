@@ -80,18 +80,29 @@ export default {
     };
   },
 
+  mounted() {
+    // Check if the user is already authenticated
+    const storedUsername = sessionStorage.getItem("username");
+    const storedApiKey = sessionStorage.getItem("api_key");
+
+    if (storedUsername && storedApiKey) {
+      // User is already authenticated, redirect to the dashboard
+      this.$router.push("Dashboard");
+    }
+  },
+
   methods: {
     handleSubmit() {
-      // Check if the entered password and email is correct
+      // Check if the entered password and username are correct
       if (this.secret !== this.correctPassword || this.username !== this.correctUsername) {
         this.loginError = "Incorrect username or password!";
         return;
       }
 
-      // make post request to database to save user
+      // Make a post request to the database to save the user
       axios
         .post(
-          "process.env.VUE_APP_LOGIN_URL",
+          "https://testenv.ciphernet.net/ngcomintranetv2/api/v1/auth/getkeys",
           {
             username: this.username,
             secret: this.secret,
@@ -104,10 +115,14 @@ export default {
         )
         .then((response) => {
           console.log(response.data);
-          localStorage.setItem("username", response.data.username);
-          localStorage.setItem("api_key", response.data.api_key);
+          // Save user information in session storage
+          sessionStorage.setItem("username", response.data.username);
+          sessionStorage.setItem("api_key", response.data.api_key);
+
           console.log(response.data.username);
           console.log(response.data.api_key);
+          
+          // Redirect to the dashboard
           this.$router.push("Dashboard");
         })
         .catch((error) => {

@@ -1,45 +1,38 @@
 <template>
+  <!-- Overlay -->
+  <div id="overlay" v-if="isLoading">
+    <div class="overlay-content">
+      <img
+        src="../assets/img/loading-circle.png"
+        alt="Loading"
+        class="loading-icon"
+      />
+    </div>
+  </div>
+  <!-- * Overlay -->
+  
   <div class="dashboard">
     <!-- App Header -->
     <div class="appHeader bg-primary text-light">
-      <div class="left">
-        <a
-          href="#"
-          class="headerButton"
-          data-bs-toggle="modal"
-          data-bs-target="#sidebarPanel"
-        >
-          <ion-icon name="menu-outline"></ion-icon>
-        </a>
-      </div>
       <div class="pageTitle">
         <img src="../assets/img/ngcom_net.jpg" alt="logo" class="logo" />
-      </div>
-      <div class="right">
-        <a href="#" class="headerButton">
-          <img
-            src="../assets/img/Settings.jpg"
-            alt="image"
-            class="imaged w32"
-          />
-        </a>
       </div>
     </div>
     <!-- * App Header -->
 
     <!-- App Capsule -->
-    <div id="appCapsule">
-      <!-- Wallet Card -->
+    <div id="appCapsule" v-if="!isLoading">
+      <!-- Profile Card -->
       <div class="section wallet-card-section pt-1">
         <div class="wallet-card">
-          <!-- Balance -->
+          <!-- Profile -->
           <div class="balance">
             <div class="left">
               <span class="title">Welcome</span>
               <h1 class="total">Administrator</h1>
             </div>
           </div>
-          <!-- * Balance -->
+          <!-- * Profile -->
 
           <!-- current date and time -->
           <div class="left">
@@ -47,7 +40,7 @@
           </div>
           <!-- * current date and time -->
 
-          <!-- Wallet Footer -->
+          <!-- Section Footer -->
           <div class="wallet-footer">
             <div class="item">
               <router-link
@@ -61,6 +54,7 @@
                 <strong>My Surveys</strong>
               </router-link>
             </div>
+
             <div class="item">
               <router-link
                 :to="{ name: 'BaseStation' }"
@@ -73,14 +67,7 @@
                 <strong>Base Station</strong>
               </router-link>
             </div>
-            <!-- <div class="item">
-              <a href="app-cards.html">
-                <div class="icon-wrapper bg-success">
-                  <ion-icon name="card-outline"></ion-icon>
-                </div>
-                <strong>Cards</strong>
-              </a>
-            </div> -->
+  
             <div class="item">
               <router-link
                 :to="{ name: 'Installation' }"
@@ -94,68 +81,13 @@
               </router-link>
             </div>
           </div>
-          <!-- * Wallet Footer -->
+          <!-- * Section Footer -->
         </div>
       </div>
-      <!-- Wallet Card -->
+      <!-- Profile Card -->
 
-      <!-- Deposit Action Sheet -->
-      <div
-        class="modal fade action-sheet"
-        id="depositActionSheet"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Balance</h5>
-            </div>
-            <div class="modal-body">
-              <div class="action-sheet-content">
-                <form>
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="account1">From</label>
-                      <select class="form-control custom-select" id="account1">
-                        <option value="0">Savings (* 5019)</option>
-                        <option value="1">Investment (* 6212)</option>
-                        <option value="2">Mortgage (* 5021)</option>
-                      </select>
-                    </div>
-                  </div>
 
-                  <div class="form-group basic">
-                    <label class="label">Enter Amount</label>
-                    <div class="input-group mb-2">
-                      <span class="input-group-text" id="basic-addona1">$</span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter an amount"
-                        value="100"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-group basic">
-                    <button
-                      type="button"
-                      class="btn btn-primary btn-block btn-lg"
-                      data-bs-dismiss="modal"
-                    >
-                      Deposit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- * Deposit Action Sheet -->
-
-      <!-- Transactions -->
+      <!--Site Survey Section -->
       <div class="section mt-4">
         <div class="section-heading">
           <h2 class="title">Site Survey</h2>
@@ -181,9 +113,9 @@
           <!-- * item -->
         </div>
       </div>
-      <!-- * Transactions -->
+      <!-- * Site Survey Section -->
 
-      <!-- Transactions -->
+      <!-- Installation Section -->
       <div class="section mt-4">
         <div class="section-heading">
           <h2 class="title">Installations</h2>
@@ -200,26 +132,24 @@
                 <strong>{{ item.customer }}</strong>
                 <p>{{ item.location }}</p>
                 <p>{{ item.installation_date }}</p>
-                <p>{{ item.scheduledtimeforinstallation }}</p>
               </div>
             </div>
           </div>
           <!-- * item -->    
         </div>
       </div>
-      <!-- * Transactions -->
-      <br />
-      <br />
-
-      <!-- app footer -->
-      <div class="appFooter">
-        <div class="footer-title">Copyright © Ngcom Networks Solutions.</div>
-        All Rights Reserved.
-      </div>
-      <!-- * app footer -->
+      <!-- * Installation Section -->
+      
     </div>
     <!-- * App Capsule -->
   </div>
+
+  <!-- app footer -->
+  <div class="appFooter">
+    <div class="footer-title">Copyright © Ngcom Networks Solutions.</div>
+    All Rights Reserved.
+  </div>
+  <!-- * app footer -->
 
   <!-- bottom menu -->
   <AppBottomMenu />
@@ -237,7 +167,7 @@ export default {
   data() {
     return {
       currentTime: '',
-      // currentTime: new Date().toLocaleString(),
+      isLoading: true,
       survey: [],
       installation: [],
     };
@@ -248,6 +178,10 @@ export default {
     }, 1000);
     this.getSurvey();
     this.getInstallation();
+    //loader or overlay timeout
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   },
   methods: {
     formatDate(date) {
@@ -289,10 +223,11 @@ export default {
     return formattedDate;
   },
     
+    // fetching pending site survey
     getSurvey() {
       axios
         .get(
-          "process.env.VUE_APP_GET_PENDING_SITESURVEY_URL",
+          process.env.VUE_APP_GET_PENDING_SITESURVEY_URL,
           {
             headers: {
               "x-api-key": localStorage.getItem("api_key"),
@@ -301,18 +236,18 @@ export default {
         )
         .then((response) => {
           this.survey = response.data.data;
-          console.log(this.survey["data"]);
+          // console.log(this.survey["data"]);
         })
         .catch((error) => {
           console.log(error);
         });
     },
 
+    // fetching the pending installation.
     getInstallation() {
       axios
         .get(
-          "process.env.VUE_APP_INSTALLATION_URL",
-          {
+          process.env.VUE_APP_INSTALLATION_URL,          {
             headers: {
               "x-api-key": localStorage.getItem("api_key"),
             },
@@ -320,13 +255,14 @@ export default {
         )
         .then((response) => {
           this.installation = response.data.data;
-          console.log(this.installation["data"]);
+          // console.log(this.installation["data"]);
         })
         .catch((error) => {
           console.log(error);
         });
     },
   },
+  
   computed: {
     sortedSurvey() {
       return this.survey.slice().sort((a, b) => {
@@ -355,5 +291,36 @@ p {
   font-size: 15px;
   font-weight: 900;
   color: #27173e;
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fe5919;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Ensure the overlay is above other elements */
+}
+
+.overlay-content {
+  text-align: center;
+}
+
+.loading-icon {
+  width: 150px;
+  height: 150px;
+  animation: spin 1s infinite linear; /* Add animation properties */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

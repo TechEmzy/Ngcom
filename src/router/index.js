@@ -11,7 +11,7 @@ import Settings from "../views/Settings.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Home",
     component: Home,
   },

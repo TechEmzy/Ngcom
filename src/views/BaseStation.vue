@@ -13,13 +13,21 @@
   <!-- My Site Survey Details Table -->
   <div class="" id="actionSheetForm" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
+
       <div class="modal-content">
+        <!-- base station header -->
         <div class="modal-header">
           <h5 class="modal-title">Base Stations</h5>
         </div>
+        <!--* base station header -->
+
+        <!-- base station form body -->
         <div class="modal-body">
           <div class="action-sheet-content">
-            <form @submit.prevent="submitForm">   
+            <!-- starting of the form field -->
+            <form @submit.prevent="submitForm"> 
+              
+              <!-- base station dropdown -->
               <div class="form-group basic">
                 <div class="input-wrapper">
                   <label class="label" for="account1">Base Station:</label>
@@ -35,7 +43,9 @@
                 </div>
                 <div class="input-info">Select a base station</div>
               </div>
-               
+              <!--* base station dropdown -->
+              
+              <!-- client coordinate field -->
               <div class="form-group basic">
                 <label class="label">client Coordinate:</label>
                 <div class="input-group">
@@ -50,7 +60,9 @@
                 </div>
                 <div class="input-info">client coordinate</div>
               </div>
+              <!--* client coordinate field -->
          
+              <!-- distance field -->
               <div class="form-group basic">
                 <label class="label" for="distance">Distance (km):</label>
                 <div class="input-group">
@@ -66,9 +78,12 @@
                 </div>
                 <div class="input-info">Distance</div>
               </div>
+              <!--* distance field -->
             </form>
+            <!--* end of the form field -->
           </div>
         </div>
+        <!--* base station form body -->
       </div>
     </div>
   </div>
@@ -101,14 +116,16 @@ export default {
     this.fetchData();
   },
   methods: {
+
+    // fetching the base station
     fetchData() {
       axios
         .get(
-          "process.env.VUE_APP_GET_BASESTATION_URL",
+          process.env.VUE_APP_GET_BASESTATION_URL,
           {
             headers: {
-              "x-api-key": "process.env.VUE_APP_API_KEY",
-              cookie: "process.env.VUE_APP_BASESTATION_COOKIE",
+              "x-api-key": process.env.VUE_APP_API_KEY,
+              cookie: process.env.VUE_APP_BASESTATION_COOKIE,
             },
           }
         )
@@ -121,6 +138,8 @@ export default {
           console.log(error);
         });
     },
+    
+    // get current location
     getCurrentLocation() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -134,6 +153,8 @@ export default {
         }
       );
     },
+
+    // calculating the distance from the base station to the client cordinate
     calculateDistance() {
       const R = 6371; // km
       const [clientLat, clientLon] =

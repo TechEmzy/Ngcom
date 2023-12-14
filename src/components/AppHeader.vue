@@ -1,15 +1,19 @@
 <template>
   <!-- App Header -->
   <div class="appHeader no-border transparent position-fix">
+    
+    <!-- header icon to go back -->
     <div class="left">
-      <!-- <button id="headerBtn" @click="back" class="headerButton goBack"> -->
         <ion-icon name="chevron-back-outline" @click="back"></ion-icon>
-      <!-- </button> -->
     </div>
+    <!--* header icon to go back -->
+    
+    <!-- Title header -->
     <div class="pageTitle">
       <h1 class="pTitle">{{ title }}</h1>
     </div>
-    <div class="right"></div>
+    <!--* Title header -->
+    
   </div>
   <!-- * App Header -->
 </template>
